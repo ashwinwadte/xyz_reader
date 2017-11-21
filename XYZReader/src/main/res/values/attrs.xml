@@ -1,4 +1,7 @@
 <resources>
+    <declare-styleable name="ArticleListActivity">
+        <attr name="sharedElementTransitions" format="boolean"/>
+    </declare-styleable>
     <declare-styleable name="DrawInsetsFrameLayout">
         <attr name="insetBackground" format="color|reference" />
     </declare-styleable>
