@@ -11,6 +11,8 @@ import android.content.Loader;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -45,7 +47,7 @@ public class ArticleListActivity extends AppCompatActivity implements
     private static final String TAG = ArticleListActivity.class.toString();
     public static int counter = 0;
     private Activity mArticleListActivity = this;
-    private Toolbar mToolbar;
+    private Snackbar mSnackbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private boolean mHoldForTransition;
@@ -70,18 +72,21 @@ public class ArticleListActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        CoordinatorLayout toolbarContainerView = (CoordinatorLayout) findViewById(R.id.toolbar_container);
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
+        mSnackbar = Snackbar.make(toolbarContainerView, R.string.updated_success, Snackbar.LENGTH_SHORT);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
 
-        TypedArray a = this.obtainStyledAttributes(R.styleable.ArticleListActivity);
-        mHoldForTransition = a.getBoolean(R.styleable.ArticleListActivity_sharedElementTransitions, false);
+        TypedArray typedArray = this.obtainStyledAttributes(R.styleable.ArticleListActivity);
+        mHoldForTransition = typedArray.getBoolean(R.styleable.ArticleListActivity_sharedElementTransitions, false);
 
 
         if (savedInstanceState == null) {
@@ -107,6 +112,8 @@ public class ArticleListActivity extends AppCompatActivity implements
     }
 
     private void updateRefreshingUI() {
+        if (!mIsRefreshing)
+            mSnackbar.show();
         mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
     }
 

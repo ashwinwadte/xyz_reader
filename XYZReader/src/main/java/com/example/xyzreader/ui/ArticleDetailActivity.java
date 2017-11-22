@@ -77,6 +77,8 @@ public class ArticleDetailActivity extends AppCompatActivity
             }
         });
 
+        mPager.setPageTransformer(true, new CoolPageTransformer());
+
         mUpButtonContainer = findViewById(R.id.up_container);
 
         mUpButton = findViewById(R.id.action_up);
@@ -153,7 +155,7 @@ public class ArticleDetailActivity extends AppCompatActivity
     }
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
-        public MyPagerAdapter(FragmentManager fm) {
+        MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

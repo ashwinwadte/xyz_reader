@@ -1,13 +1,15 @@
-<com.example.xyzreader.ui.DrawInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                android:id="@+id/draw_insets_frame_layout"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent">
+<com.example.xyzreader.ui.DrawInsetsFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/draw_insets_frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.example.xyzreader.ui.ObservableScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -87,7 +89,6 @@
                     android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
                     android:paddingBottom="@dimen/detail_body_bottom_margin"
                     android:textColor="@color/colorPrimaryText"
-                    android:textColorLink="@color/colorAccent"
                     android:textSize="@dimen/detail_body_text_size"/>
 
             </com.example.xyzreader.ui.MaxWidthLinearLayout>
@@ -98,7 +99,7 @@
         android:id="@+id/share_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right|end"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="@string/action_share"
         android:src="@drawable/fab_share"
@@ -106,6 +107,8 @@
         app:elevation="6dp"
         app:fabSize="normal"
         app:layout_anchor="@id/scrollview"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_behavior="com.example.xyzreader.ui.FancyFabBehavior"
         app:pressedTranslationZ="6dp"/>
 
 </com.example.xyzreader.ui.DrawInsetsFrameLayout>
